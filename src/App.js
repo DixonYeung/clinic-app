@@ -56,7 +56,7 @@ function App() {
   useEffect(()=>{
     setIsLoggedIn(null);
     setPageState("login");
-    Axios.get("http://localhost:4469/api/login").then((response)=>{
+    Axios.get("http://localhost:4469/api/clinic/login").then((response)=>{
       if(response.data.loggedIn === true){
         setUserList(response.data.user);
         setPageState("login-browse-record");
@@ -76,7 +76,7 @@ function App() {
 
 
   const registerButtonClicked = () => {
-    Axios.post('http://localhost:4469/api/register',{
+    Axios.post('http://localhost:4469/api/clinic/register',{
       email: regInputFieldValue['email'],
       password: regInputFieldValue['password'],
       clinicName: regInputFieldValue['clinicName'],
@@ -91,7 +91,7 @@ function App() {
   };
 
   const loginButtonClicked = () => {
-    Axios.post('http://localhost:4469/api/login',{
+    Axios.post('http://localhost:4469/api/clinic/login',{
       email: loginFieldValue['userLoginEmail'],
       password: loginFieldValue['userLoginPassword']
     }).then( (response) => {
@@ -109,7 +109,7 @@ function App() {
   };
 
   const logoutButtonClicked = () => {
-    Axios.post('http://localhost:4469/api/logout',{
+    Axios.post('http://localhost:4469/api/clinic/logout',{
     }).then( (response) => {
       if(response.data.loggedIn === false){
         setPageState("login");
@@ -121,7 +121,7 @@ function App() {
   }
 
   const createRecordSumbitButtonClicked = () => {
-    Axios.post('http://localhost:4469/api/createNewConsultationRecord',{
+    Axios.post('http://localhost:4469/api/clinic/createNewConsultationRecord',{
       doctor_name: newConsultationRecord['doctor_name'],
       patient_name: newConsultationRecord['patient_name'],
       diagnosis: newConsultationRecord['diagnosis'],
