@@ -1,19 +1,20 @@
- React from "react";
+import React from  "react";
 export default function App() {
   const [milisecond, setMilisecond] = React.useState(0);
   const [second, setSecond] = React.useState(0);
   const status = React.useRef(false);
-  const intervalStore = React.useRef(0);
+  const intervalStore = React.useRef(null);
+  const [buttonString, setButtonString] = React.useState(false);
   const handleClick = ()=> {
     status.current = !status.current;
-    intervalStore.current = window.setInterval(() => {
+    if(status.current) {intervalStore.current = window.setInterval(() => {
       setMilisecond((ms) => {
         if(ms < 99){
           return ms + 1;
         }
         else{
           setSecond((s)=>{
-            if(s < 9){
+            if(s < 59){
               return s+1;
             }
             else{
@@ -23,18 +24,12 @@ export default function App() {
           return 0;
         }
       });
-      if(status.current==false){
-        window.clearInterval(intervalStore.current);
-      };
+      
     }, 10);
-
+    }
+    else if(status.current==false){
+        window.clearInterval(intervalStore.current);
+    };
+    setButtonString((prev)=>!prev);
   };
 
-
-
-  return (
-    <div className="App">
-      <span>{second}</span>.<span>{milisecond}</span>
-      <button onClick={handleClick}>{status.current.toString()}</button>
-    </div>
-  );
