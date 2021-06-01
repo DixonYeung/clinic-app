@@ -3,6 +3,7 @@ export default function App() {
   const [milisecond, setMilisecond] = React.useState(0);
   const [second, setSecond] = React.useState(0);
   const [status, setStatus] = React.useState("start");
+  const [intervalPoint, setIntervalPoint] = React.useState();
   const handleClick = ()=> {
 
     const interval = window.setInterval(() => {
@@ -23,11 +24,12 @@ export default function App() {
         }
       });
     }, 10);
+    setIntervalPoint(interval);
     if(status == "start"){
       setStatus("stop");
     }
     else if(status == "stop"){
-      window.clearInterval(interval);
+      window.clearInterval(intervalPoint);
       setStatus("start");
     }
   };
