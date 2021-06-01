@@ -1,12 +1,12 @@
-import React from "react";
+ React from "react";
 export default function App() {
   const [milisecond, setMilisecond] = React.useState(0);
   const [second, setSecond] = React.useState(0);
-  const [status, setStatus] = React.useState("start");
-  const [intervalPoint, setIntervalPoint] = React.useState();
+  const status = React.useRef(false);
+  const intervalStore = React.useRef(0);
   const handleClick = ()=> {
-
-    const interval = window.setInterval(() => {
+    status.current = !status.current;
+    intervalStore.current = window.setInterval(() => {
       setMilisecond((ms) => {
         if(ms < 99){
           return ms + 1;
@@ -23,15 +23,11 @@ export default function App() {
           return 0;
         }
       });
+      if(status.current==false){
+        window.clearInterval(intervalStore.current);
+      };
     }, 10);
-    setIntervalPoint(interval);
-    if(status == "start"){
-      setStatus("stop");
-    }
-    else if(status == "stop"){
-      window.clearInterval(intervalPoint);
-      setStatus("start");
-    }
+
   };
 
 
@@ -39,7 +35,6 @@ export default function App() {
   return (
     <div className="App">
       <span>{second}</span>.<span>{milisecond}</span>
-      <button onClick={handleClick}>{status}</button>
+      <button onClick={handleClick}>{status.current.toString()}</button>
     </div>
   );
-}
