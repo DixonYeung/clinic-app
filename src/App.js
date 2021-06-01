@@ -1,4 +1,4 @@
- React from "react";
+import React from "react";
 export default function App() {
   const [milisecond, setMilisecond] = React.useState(0);
   const [second, setSecond] = React.useState(0);
