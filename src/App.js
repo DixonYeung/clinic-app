@@ -32,4 +32,11 @@ export default function App() {
     };
     setButtonString((prev)=>!prev);
   };
+return(
+<div className="App">
+      <span>{second}</span>.<span>{milisecond}</span>
+      <button onClick={handleClick}>{buttonString==true ? "stop" : "start"}</button>
+    </div>
+);
+}
 
